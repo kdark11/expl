@@ -5,6 +5,22 @@
   </head>
   <body>
     <h1>Welcome to My Flask App</h1>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class=flashes>
+            {% for message in messages %}
+                <li id="flash-message">{{ message }}</li>
+            {% endfor %}
+            </ul>
+            <script>
+            setTimeout(function() {
+                var flash = document.getElementById('flash-message');
+                flash.style.display = 'none';
+            }, 3000);
+            </script>
+        {% endif %}
+    {% endwith %}
+
     <form method="POST">
         {{ form.csrf_token }}
         <p>
